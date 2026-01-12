@@ -1,0 +1,25 @@
+
+> 2-mega-store@1.0.0 lint:fix
+> eslint . --fix --report-unused-disable-directives
+
+
+<--- Last few GCs --->
+
+[16953:0x8302000]    87703 ms: Mark-Compact 2042.2 (2088.9) -> 2038.8 (2089.4) MB, pooled: 1 MB, 1365.82 / 0.00 ms  (average mu = 0.075, current mu = 0.027) allocation failure; scavenge might not succeed
+[16953:0x8302000]    89478 ms: Mark-Compact 2042.9 (2089.4) -> 2039.0 (2089.7) MB, pooled: 1 MB, 1753.27 / 0.00 ms  (average mu = 0.042, current mu = 0.013) allocation failure; scavenge might not succeed
+
+
+<--- JS stacktrace --->
+
+FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 0xe40d2e node::OOMErrorHandler(char const*, v8::OOMDetails const&) [node]
+ 2: 0x12167b0 v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [node]
+ 3: 0x1216a87 v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [node]
+ 4: 0x1444365  [node]
+ 5: 0x1444393  [node]
+ 6: 0x145d46a  [node]
+ 7: 0x1460638  [node]
+ 8: 0x1cc64a1  [node]
+Aborted

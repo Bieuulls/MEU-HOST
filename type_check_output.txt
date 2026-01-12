@@ -1,0 +1,156 @@
+
+> 2-mega-store@1.0.0 type-check
+> tsc --noEmit
+
+src/components/layout/Header.tsx(9,9): error TS6133: 'navigate' is declared but its value is never read.
+src/components/products/ProductForm.tsx(1,27): error TS6133: 'useEffect' is declared but its value is never read.
+src/components/products/ProductForm.tsx(2,21): error TS6133: 'Plus' is declared but its value is never read.
+src/components/products/ProductForm.tsx(62,7): error TS2322: Type 'number | ""' is not assignable to type 'string'.
+  Type 'number' is not assignable to type 'string'.
+src/components/products/ProductForm.tsx(109,9): error TS2353: Object literal may only specify known properties, and 'images' does not exist in type 'Partial<Product>'.
+src/components/products/ProductList.tsx(2,18): error TS6133: 'Filter' is declared but its value is never read.
+src/components/products/ProductList.tsx(2,26): error TS6133: 'Download' is declared but its value is never read.
+src/components/products/ProductModal.tsx(70,29): error TS2339: Property 'image' does not exist on type 'Product'.
+src/components/products/ProductModal.tsx(70,50): error TS2339: Property 'image' does not exist on type 'Product'.
+src/components/products/ProductModal.tsx(73,19): error TS2345: Argument of type '{ name: string; description: string; price: string; stock: string; sku: string; barcode: string; weight: string; status: "active"; }' is not assignable to parameter of type 'SetStateAction<ProductFormData>'.
+  Property 'images' is missing in type '{ name: string; description: string; price: string; stock: string; sku: string; barcode: string; weight: string; status: "active"; }' but required in type 'ProductFormData'.
+src/components/products/ProductModal.tsx(177,9): error TS2353: Object literal may only specify known properties, and 'tenant_id' does not exist in type 'Product'.
+src/components/theme/SpacingControl.tsx(19,3): error TS6133: 'type' is declared but its value is never read.
+src/components/theme/ThemeSettings.tsx(3,1): error TS6133: 'FontSelector' is declared but its value is never read.
+src/components/theme/ThemeSettings.tsx(4,1): error TS6133: 'SpacingControl' is declared but its value is never read.
+src/components/theme/ThemeSettings.tsx(113,34): error TS2339: Property 'hero' does not exist on type 'ThemeSettings'.
+src/components/theme/ThemeSettings.tsx(114,50): error TS2345: Argument of type '"hero"' is not assignable to parameter of type 'keyof ThemeSettings'.
+src/components/theme/ThemeSettings.tsx(115,32): error TS2339: Property 'hero' does not exist on type 'ThemeSettings'.
+src/components/theme/ThemeSettings.tsx(127,34): error TS2339: Property 'hero' does not exist on type 'ThemeSettings'.
+src/components/theme/ThemeSettings.tsx(128,50): error TS2345: Argument of type '"hero"' is not assignable to parameter of type 'keyof ThemeSettings'.
+src/components/theme/ThemeSettings.tsx(129,32): error TS2339: Property 'hero' does not exist on type 'ThemeSettings'.
+src/components/theme/ThemeSettings.tsx(149,34): error TS2339: Property 'hero' does not exist on type 'ThemeSettings'.
+src/components/theme/ThemeSettings.tsx(150,50): error TS2345: Argument of type '"hero"' is not assignable to parameter of type 'keyof ThemeSettings'.
+src/components/theme/ThemeSettings.tsx(151,32): error TS2339: Property 'hero' does not exist on type 'ThemeSettings'.
+src/components/theme/ThemeSettings.tsx(152,41): error TS2339: Property 'hero' does not exist on type 'ThemeSettings'.
+src/components/theme/ThemeSettings.tsx(161,34): error TS2339: Property 'hero' does not exist on type 'ThemeSettings'.
+src/components/theme/ThemeSettings.tsx(162,50): error TS2345: Argument of type '"hero"' is not assignable to parameter of type 'keyof ThemeSettings'.
+src/components/theme/ThemeSettings.tsx(163,32): error TS2339: Property 'hero' does not exist on type 'ThemeSettings'.
+src/components/theme/ThemeSettings.tsx(164,44): error TS2339: Property 'hero' does not exist on type 'ThemeSettings'.
+src/contexts/AuthContext.tsx(19,51): error TS6133: 'password' is declared but its value is never read.
+src/contexts/AuthContext.tsx(37,54): error TS6133: 'password' is declared but its value is never read.
+src/contexts/ThemeContext.tsx(76,3): error TS2353: Object literal may only specify known properties, and 'hero' does not exist in type 'ThemeSettings'.
+src/lib/db.ts(74,13): error TS2304: Cannot find name 'initializeTenantSchema'.
+src/pages/OnlineStore/components/EditorThemeSite/ThemeEditor.tsx(41,9): error TS6133: 'updateTheme' is declared but its value is never read.
+src/pages/OnlineStore/components/EditorThemeSite/components/ColorPicker.tsx(2,30): error TS2307: Cannot find module 'react-color' or its corresponding type declarations.
+src/pages/OnlineStore/components/EditorThemeSite/components/ColorPicker.tsx(36,24): error TS7006: Parameter 'color' implicitly has an 'any' type.
+src/pages/OnlineStore/components/ThemeEditor.tsx(10,3): error TS6133: 'AlertCircle' is declared but its value is never read.
+src/pages/OnlineStore/components/ThemeEditor.tsx(11,3): error TS6133: 'Check' is declared but its value is never read.
+src/pages/OnlineStore/components/ThemeEditor.tsx(15,20): error TS2459: Module '"../../../contexts/ThemeContext"' declares 'ThemeSettings' locally, but it is not exported.
+src/pages/OnlineStore/components/ThemeEditor.tsx(40,25): error TS2345: Argument of type 'string | number | symbol' is not assignable to parameter of type 'keyof ThemeSettings'.
+  Type 'string' is not assignable to type 'keyof ThemeSettings'.
+src/pages/OnlineStore/components/ThemeEditor.tsx(40,63): error TS7053: Element implicitly has an 'any' type because expression of type 'string | number | symbol' can't be used to index type 'ThemeSettings'.
+  No index signature with a parameter of type 'string' was found on type 'ThemeSettings'.
+src/pages/OnlineStore/components/ThemeHeader.tsx(8,9): error TS6133: 'navigate' is declared but its value is never read.
+src/pages/Products.tsx(341,26): error TS6133: 'product' is declared but its value is never read.
+src/pages/Products.tsx(359,9): error TS2322: Type '"view"' is not assignable to type '"create" | "edit"'.
+src/pages/Settings.tsx(2,1): error TS6192: All imports in import declaration are unused.
+src/pages/Store/SalesChannels/index.tsx(2,58): error TS2307: Cannot find module '@/components/ui/card' or its corresponding type declarations.
+src/pages/Store/SalesChannels/index.tsx(3,24): error TS2307: Cannot find module '@/components/ui/button' or its corresponding type declarations.
+src/pages/Store/SalesChannels/index.tsx(15,20): error TS6133: 'setChannels' is declared but its value is never read.
+src/pages/Store/StoreFront.tsx(4,1): error TS6133: 'FeaturedProducts' is declared but its value is never read.
+src/pages/Store/components/Banner.tsx(24,11): error TS2339: Property 'banner' does not exist on type 'ThemeSettings'.
+src/pages/Store/components/Banner.tsx(107,22): error TS7006: Parameter 'slide' implicitly has an 'any' type.
+src/pages/Store/components/Banner.tsx(107,29): error TS7006: Parameter 'index' implicitly has an 'any' type.
+src/pages/Store/components/Banner.tsx(179,26): error TS7006: Parameter '_' implicitly has an 'any' type.
+src/pages/Store/components/Banner.tsx(179,29): error TS7006: Parameter 'index' implicitly has an 'any' type.
+src/pages/Store/components/Cart.tsx(28,9): error TS6133: 'theme' is declared but its value is never read.
+src/pages/Store/components/CheckoutForm.tsx(1,27): error TS6133: 'useEffect' is declared but its value is never read.
+src/pages/Store/components/CheckoutForm.tsx(562,33): error TS2304: Cannot find name 'CartItem'.
+src/pages/Store/components/FeaturedProducts.tsx(12,11): error TS2339: Property 'featuredProducts' does not exist on type 'ThemeSettings'.
+src/pages/Store/components/Footer.tsx(123,29): error TS2339: Property 'layout' does not exist on type '{ columns: number; backgroundColor: string; textColor: string; style?: { backgroundColor: string; borderTop: boolean; borderColor: string; } | undefined; showSocial: boolean; copyrightText: string; links: { ...; }[]; sections: { ...; }[]; copyright: { ...; }; }'.
+src/pages/Store/components/Footer.tsx(133,55): error TS2339: Property 'layout' does not exist on type '{ columns: number; backgroundColor: string; textColor: string; style?: { backgroundColor: string; borderTop: boolean; borderColor: string; } | undefined; showSocial: boolean; copyrightText: string; links: { ...; }[]; sections: { ...; }[]; copyright: { ...; }; }'.
+src/pages/Store/components/Footer.tsx(133,99): error TS2339: Property 'layout' does not exist on type '{ columns: number; backgroundColor: string; textColor: string; style?: { backgroundColor: string; borderTop: boolean; borderColor: string; } | undefined; showSocial: boolean; copyrightText: string; links: { ...; }[]; sections: { ...; }[]; copyright: { ...; }; }'.
+src/pages/Store/components/Footer.tsx(134,36): error TS2345: Argument of type '(section: FooterSection, index: number) => JSX.Element' is not assignable to parameter of type '(value: { type: string; title?: { text: string; color: string; fontSize: string; fontWeight: string; } | undefined; links?: { platform?: string | undefined; text?: string | undefined; url: string; }[] | undefined; ... 7 more ...; methodSize?: string | undefined; }, index: number, array: { ...; }[]) => Element'.
+  Types of parameters 'section' and 'value' are incompatible.
+    Type '{ type: string; title?: { text: string; color: string; fontSize: string; fontWeight: string; } | undefined; links?: { platform?: string | undefined; text?: string | undefined; url: string; }[] | undefined; ... 7 more ...; methodSize?: string | undefined; }' is not assignable to type 'FooterSection'.
+      Types of property 'title' are incompatible.
+        Type '{ text: string; color: string; fontSize: string; fontWeight: string; } | undefined' is not assignable to type '{ text: string; fontSize: string; fontWeight: string; color: string; }'.
+          Type 'undefined' is not assignable to type '{ text: string; fontSize: string; fontWeight: string; color: string; }'.
+src/pages/Store/components/Footer.tsx(209,57): error TS2339: Property 'input' does not exist on type '{ title: string; subtitle: string; buttonText: string; backgroundColor: string; textColor: string; layout: "boxed" | "full_width"; }'.
+src/pages/Store/components/Footer.tsx(217,63): error TS2339: Property 'input' does not exist on type '{ title: string; subtitle: string; buttonText: string; backgroundColor: string; textColor: string; layout: "boxed" | "full_width"; }'.
+src/pages/Store/components/Footer.tsx(218,53): error TS2339: Property 'input' does not exist on type '{ title: string; subtitle: string; buttonText: string; backgroundColor: string; textColor: string; layout: "boxed" | "full_width"; }'.
+src/pages/Store/components/Footer.tsx(219,93): error TS2339: Property 'input' does not exist on type '{ title: string; subtitle: string; buttonText: string; backgroundColor: string; textColor: string; layout: "boxed" | "full_width"; }'.
+src/pages/Store/components/Footer.tsx(235,89): error TS2339: Property 'button' does not exist on type '{ title: string; subtitle: string; buttonText: string; backgroundColor: string; textColor: string; layout: "boxed" | "full_width"; }'.
+src/pages/Store/components/Header.tsx(8,22): error TS6133: 'setIsScrolled' is declared but its value is never read.
+src/pages/Store/components/Hero.tsx(6,11): error TS2339: Property 'hero' does not exist on type 'ThemeSettings'.
+src/pages/Store/components/Newsletter.tsx(11,17): error TS2339: Property 'enabled' does not exist on type '{ title: string; subtitle: string; buttonText: string; backgroundColor: string; textColor: string; layout: "boxed" | "full_width"; }'.
+src/pages/Store/components/Newsletter.tsx(45,30): error TS2339: Property 'background' does not exist on type '{ title: string; subtitle: string; buttonText: string; backgroundColor: string; textColor: string; layout: "boxed" | "full_width"; }'.
+src/pages/Store/components/Newsletter.tsx(46,44): error TS2339: Property 'background' does not exist on type '{ title: string; subtitle: string; buttonText: string; backgroundColor: string; textColor: string; layout: "boxed" | "full_width"; }'.
+src/pages/Store/components/Newsletter.tsx(46,87): error TS2339: Property 'background' does not exist on type '{ title: string; subtitle: string; buttonText: string; backgroundColor: string; textColor: string; layout: "boxed" | "full_width"; }'.
+src/pages/Store/components/Newsletter.tsx(46,125): error TS2339: Property 'background' does not exist on type '{ title: string; subtitle: string; buttonText: string; backgroundColor: string; textColor: string; layout: "boxed" | "full_width"; }'.
+src/pages/Store/components/Newsletter.tsx(47,22): error TS2339: Property 'background' does not exist on type '{ title: string; subtitle: string; buttonText: string; backgroundColor: string; textColor: string; layout: "boxed" | "full_width"; }'.
+src/pages/Store/components/Newsletter.tsx(54,31): error TS2339: Property 'type' does not exist on type '"boxed" | "full_width"'.
+  Property 'type' does not exist on type '"boxed"'.
+src/pages/Store/components/Newsletter.tsx(56,31): error TS2339: Property 'type' does not exist on type '"boxed" | "full_width"'.
+  Property 'type' does not exist on type '"boxed"'.
+src/pages/Store/components/Newsletter.tsx(61,37): error TS2551: Property 'fontSize' does not exist on type 'string'. Did you mean 'fontsize'?
+src/pages/Store/components/Newsletter.tsx(62,37): error TS2339: Property 'fontWeight' does not exist on type 'string'.
+src/pages/Store/components/Newsletter.tsx(63,35): error TS2339: Property 'marginBottom' does not exist on type 'string'.
+src/pages/Store/components/Newsletter.tsx(66,44): error TS2339: Property 'color' does not exist on type 'string'.
+src/pages/Store/components/Newsletter.tsx(68,29): error TS2339: Property 'text' does not exist on type 'string'.
+src/pages/Store/components/Newsletter.tsx(73,40): error TS2551: Property 'fontSize' does not exist on type 'string'. Did you mean 'fontsize'?
+src/pages/Store/components/Newsletter.tsx(74,40): error TS2339: Property 'fontWeight' does not exist on type 'string'.
+src/pages/Store/components/Newsletter.tsx(75,38): error TS2339: Property 'marginBottom' does not exist on type 'string'.
+src/pages/Store/components/Newsletter.tsx(78,47): error TS2339: Property 'color' does not exist on type 'string'.
+src/pages/Store/components/Newsletter.tsx(80,32): error TS2339: Property 'text' does not exist on type 'string'.
+src/pages/Store/components/Newsletter.tsx(89,41): error TS2339: Property 'input' does not exist on type '{ title: string; subtitle: string; buttonText: string; backgroundColor: string; textColor: string; layout: "boxed" | "full_width"; }'.
+src/pages/Store/components/Newsletter.tsx(102,47): error TS2339: Property 'input' does not exist on type '{ title: string; subtitle: string; buttonText: string; backgroundColor: string; textColor: string; layout: "boxed" | "full_width"; }'.
+src/pages/Store/components/Newsletter.tsx(103,37): error TS2339: Property 'input' does not exist on type '{ title: string; subtitle: string; buttonText: string; backgroundColor: string; textColor: string; layout: "boxed" | "full_width"; }'.
+src/pages/Store/components/Newsletter.tsx(140,29): error TS2339: Property 'button' does not exist on type '{ title: string; subtitle: string; buttonText: string; backgroundColor: string; textColor: string; layout: "boxed" | "full_width"; }'.
+src/pages/Store/components/ProductCard.tsx(19,68): error TS6133: 'layout' is declared but its value is never read.
+src/pages/Store/components/ProductCard.tsx(21,39): error TS2339: Property 'featuredProducts' does not exist on type 'ThemeSettings'.
+src/pages/Store/components/ProductDetails.tsx(27,9): error TS6133: 'theme' is declared but its value is never read.
+src/pages/Store/components/ProductList.tsx(4,1): error TS6133: 'ProductType' is declared but its value is never read.
+src/pages/Store/components/ProductList.tsx(33,9): error TS6133: 'theme' is declared but its value is never read.
+src/pages/Store/components/ProductPage.tsx(156,9): error TS6133: 'theme' is declared but its value is never read.
+src/pages/Store/components/ThemeSettingsForm.tsx(2,34): error TS2307: Cannot find module './contexts/ThemeSettingsContext' or its corresponding type declarations.
+src/pages/Store/components/ThemeSettingsForm.tsx(3,50): error TS2307: Cannot find module './config/settings_schema' or its corresponding type declarations.
+src/pages/Store/components/ThemeSettingsForm.tsx(77,20): error TS7006: Parameter 'section' implicitly has an 'any' type.
+src/pages/Store/components/ThemeSettingsForm.tsx(81,36): error TS7006: Parameter 'setting' implicitly has an 'any' type.
+src/pages/Store/pages/Cart.tsx(5,23): error TS6133: 'X' is declared but its value is never read.
+src/pages/Store/pages/Catalog.tsx(30,9): error TS6133: 'theme' is declared but its value is never read.
+src/pages/Store/pages/Contact.tsx(13,9): error TS6133: 'theme' is declared but its value is never read.
+src/pages/Store/pages/Product.tsx(21,9): error TS6133: 'theme' is declared but its value is never read.
+src/pages/Store/routes.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/pages/Store/routes.tsx(10,10): error TS2305: Module '"./pages/Checkout"' has no exported member 'Checkout'.
+src/pages/Store/routes.tsx(11,29): error TS2307: Cannot find module './pages/AccountPage' or its corresponding type declarations.
+src/pages/Store/routes.tsx(12,31): error TS2307: Cannot find module './pages/SearchResults' or its corresponding type declarations.
+src/routes/dashboardRoutes.tsx(2,117): error TS2307: Cannot find module '../pages' or its corresponding type declarations.
+src/routes/dashboardRoutes.tsx(4,7): error TS6133: 'dashboardRoutes' is declared but its value is never read.
+src/routes/storeRoutes.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/server/ThemePreviewServer.ts(146,18): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '(req: Request, res: Response, next: NextFunction) => express.Response<any, Record<string, any>> | undefined' is not assignable to parameter of type 'PathParams'.
+src/server/preview-server.ts(16,51): error TS2554: Expected 0 arguments, but got 1.
+src/server/routes/upload.ts(43,42): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>, number>) => Promise<...>' is not assignable to parameter of type 'RequestHandlerParams<ParamsDictionary, any, any, ParsedQs, Record<string, any>>'.
+      Type '(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>, number>) => Promise<...>' is not assignable to type 'RequestHandler<ParamsDictionary, any, any, ParsedQs, Record<string, any>>'.
+        Type 'Promise<Response<any, Record<string, any>, number> | undefined>' is not assignable to type 'void | Promise<void>'.
+          Type 'Promise<Response<any, Record<string, any>, number> | undefined>' is not assignable to type 'Promise<void>'.
+            Type 'Response<any, Record<string, any>, number> | undefined' is not assignable to type 'void'.
+              Type 'Response<any, Record<string, any>, number>' is not assignable to type 'void'.
+src/server/routes/upload.ts(58,29): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '(req: Request<{ filename: string; }, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>, number>) => Promise<...>' is not assignable to parameter of type 'Application<Record<string, any>>'.
+      Type '(req: Request<{ filename: string; }, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>, number>) => Promise<...>' is missing the following properties from type 'Application<Record<string, any>>': init, defaultConfiguration, engine, set, and 63 more.
+src/services/enhancedProductService.ts(1,1): error TS6133: 'Database' is declared but its value is never read.
+src/services/productService.ts(1,10): error TS2305: Module '"../lib/db"' has no exported member 'openDatabase'.
+src/services/productService.ts(3,10): error TS2305: Module '"sqlite3"' has no exported member 'DatabaseError'.
+src/services/productService.ts(70,9): error TS18046: 'error' is of type 'unknown'.
+src/services/productService.ts(73,9): error TS18046: 'error' is of type 'unknown'.
+src/services/productService.ts(91,13): error TS18048: 'db' is possibly 'undefined'.
+src/services/productService.ts(94,36): error TS2345: Argument of type 'Database<Database, Statement> | undefined' is not assignable to parameter of type 'Database<Database, Statement>'.
+  Type 'undefined' is not assignable to type 'Database<Database, Statement>'.
+src/services/productService.ts(97,13): error TS18048: 'db' is possibly 'undefined'.
+src/services/productService.ts(122,42): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/productService.ts(136,64): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/themeService.ts(169,5): error TS2322: Type '{ text: string; color: string; fontSize: string; fontWeight: string; marginBottom: string; }' is not assignable to type 'string'.
+src/services/themeService.ts(176,5): error TS2322: Type '{ text: string; color: string; fontSize: string; fontWeight: string; marginBottom: string; }' is not assignable to type 'string'.
+src/services/themeService.ts(203,5): error TS2322: Type '{ type: string; padding: { top: number; bottom: number; }; }' is not assignable to type '"boxed" | "full_width"'.
