@@ -5,7 +5,7 @@ import { Register } from './pages/Register';
 import { ResetPassword } from './pages/ResetPassword';
 import { Dashboard } from './pages/Dashboard';
 import { ThemeEditor } from './pages/editor/GROW/ThemeEditor';
-import { Store } from './pages/store/Store';
+import { Store } from './pages/Store/Store';
 import { NotFound } from './pages/NotFound';
 import { Segments } from './pages/dashboard/products/Segments';
 import { PrivateRoute } from './components/PrivateRoute';

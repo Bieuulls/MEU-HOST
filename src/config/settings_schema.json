@@ -1,0 +1,42 @@
+{
+  "current": {
+    "colors_solid_button_labels": "#FFFFFF",
+    "colors_accent_1": "#3b82f6",
+    "colors_accent_2": "#1f2937",
+    "colors_text": "#374151",
+    "colors_outline_button_labels": "#3b82f6",
+    "colors_background_1": "#FFFFFF",
+    "colors_background_2": "#f3f4f6",
+    "type_header_font": "assistant_n4",
+    "type_body_font": "assistant_n4",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo_width": 100,
+          "menu": "main-menu"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "show_social": true,
+          "show_payment_icons": true
+        }
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "colors_solid_button_labels": "#FFFFFF",
+      "colors_accent_1": "#3b82f6",
+      "colors_accent_2": "#1f2937",
+      "colors_text": "#374151",
+      "colors_outline_button_labels": "#3b82f6",
+      "colors_background_1": "#FFFFFF",
+      "colors_background_2": "#f3f4f6",
+      "type_header_font": "assistant_n4",
+      "type_body_font": "assistant_n4"
+    }
+  }
+}

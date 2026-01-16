@@ -1,0 +1,6 @@
+node_modules/
+dist/
+build/
+database.sqlite
+uploads/
+.env

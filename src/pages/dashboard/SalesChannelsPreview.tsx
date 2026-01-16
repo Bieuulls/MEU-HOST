@@ -1,5 +1,4 @@
 import { Monitor, Smartphone, Paintbrush, ExternalLink } from 'lucide-react';
-import { ImageWithFallback } from '../../components/common/ImageWithFallback';
 
 export function SalesChannelsPreview() {
   return (
@@ -37,8 +36,8 @@ export function SalesChannelsPreview() {
           </div>
           <div className="aspect-[16/9] bg-white border-b">
             <div className="w-full h-full bg-gray-50 flex items-center justify-center">
-              <ImageWithFallback
-                src="/preview/desktop.png"
+              <img
+                src="https://via.placeholder.com/800x450"
                 alt="Desktop preview"
                 className="max-w-full max-h-full object-contain"
               />
@@ -54,8 +53,8 @@ export function SalesChannelsPreview() {
           </div>
           <div className="aspect-[9/16] bg-white border-b p-4">
             <div className="w-full h-full bg-gray-50 flex items-center justify-center rounded-lg">
-              <ImageWithFallback
-                src="/preview/mobile.png"
+              <img
+                src="https://via.placeholder.com/375x667"
                 alt="Mobile preview"
                 className="max-w-full max-h-full object-contain rounded"
               />
