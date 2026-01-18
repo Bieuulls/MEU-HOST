@@ -13,7 +13,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [state, setState] = useState<AuthState>({
     user: null,
     isAuthenticated: false,
-    loading: true,
+    isLoading: true,
   });
 
   const login = useCallback(async (email: string, password: string) => {
@@ -22,7 +22,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const user: User = { id: '1', email, name: 'John Doe', role: 'customer' };
       const authData = { user, isAuthenticated: true };
       localStorage.setItem('auth', JSON.stringify(authData));
-      setState({ user, isAuthenticated: true, loading: false });
+      setState({ user, isAuthenticated: true, isLoading: false });
     } catch (error) {
       console.error('Login failed:', error);
       throw error;
@@ -30,7 +30,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const logout = useCallback(() => {
-    setState({ user: null, isAuthenticated: false, loading: false });
+    setState({ user: null, isAuthenticated: false, isLoading: false });
     localStorage.removeItem('auth'); // Clear auth data from localStorage
   }, []);
 
@@ -38,7 +38,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       // TODO: Implement actual API call
       const user: User = { id: '1', email, name, role: 'customer' };
-      setState({ user, isAuthenticated: true, loading: false });
+      setState({ user, isAuthenticated: true, isLoading: false });
     } catch (error) {
       console.error('Registration failed:', error);
       throw error;
@@ -53,13 +53,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setState({
           user: parsedAuth.user,
           isAuthenticated: parsedAuth.isAuthenticated,
-          loading: false,
+          isLoading: false,
         });
       } catch (error) {
         console.error('Error parsing auth data:', error);
       }
     } else {
-      setState(prev => ({ ...prev, loading: false }));
+      setState(prev => ({ ...prev, isLoading: false }));
     }
   }, []);
 
