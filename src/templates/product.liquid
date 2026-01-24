@@ -1,0 +1,106 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+<div class="product-template page-width">
+  <div class="product-template__grid">
+    <!-- Product Images -->
+    <div class="product-template__media">
+      {% for image in product.images %}
+        <div class="product-template__image">
+          <img src="{{ image | img_url: '800x' }}"
+               alt="{{ image.alt | escape }}"
+               loading="lazy"
+               width="800"
+               height="800">
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Product Info -->
+    <div class="product-template__info">
+      <h1 class="product-template__title">{{ product.title }}</h1>
+
+      <div class="product-template__price">
+        {% if product.compare_at_price > product.price %}
+          <span class="product-template__price--sale">{{ current_variant.price | money }}</span>
+          <span class="product-template__price--compare">{{ current_variant.compare_at_price | money }}</span>
+        {% else %}
+          <span class="product-template__price--regular">{{ current_variant.price | money }}</span>
+        {% endif %}
+      </div>
+
+      {% form 'product', product %}
+        <!-- Variant Selection -->
+        {% for option in product.options_with_values %}
+          <div class="product-template__option">
+            <label for="Option{{ forloop.index }}">
+              {{ option.name }}
+            </label>
+
+            <select
+              id="Option{{ forloop.index }}"
+              name="options[{{ option.name }}]"
+              class="product-template__select">
+              {% for value in option.values %}
+                <option
+                  value="{{ value }}"
+                  {% if option.selected_value == value %}selected="selected"{% endif %}>
+                  {{ value }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+        {% endfor %}
+
+        <!-- Quantity -->
+        <div class="product-template__quantity">
+          <label for="Quantity">Quantity</label>
+          <input
+            type="number"
+            id="Quantity"
+            name="quantity"
+            value="1"
+            min="1"
+            class="product-template__quantity-input">
+        </div>
+
+        <!-- Add to Cart Button -->
+        <button
+          type="submit"
+          name="add"
+          class="button button--primary button--full"
+          {% unless current_variant.available %}disabled{% endunless %}>
+          {% if current_variant.available %}
+            Add to cart
+          {% else %}
+            Sold out
+          {% endif %}
+        </button>
+      {% endform %}
+
+      <!-- Product Description -->
+      <div class="product-template__description rte">
+        {{ product.description }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Template",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_quantity_selector",
+      "label": "Show quantity selector",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variant_labels",
+      "label": "Show variant labels",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,79 @@
+{% assign collection = collections[section.settings.collection] %}
+
+<div class="featured-collection page-width">
+  <h2 class="section-title">{{ section.settings.title }}</h2>
+
+  <div class="product-grid">
+    {% for product in collection.products limit: section.settings.products_to_show %}
+      <div class="product-card">
+        <a href="{{ product.url }}" class="product-card__link">
+          <div class="product-card__image">
+            <img src="{{ product.featured_image | img_url: '400x' }}"
+                 alt="{{ product.featured_image.alt | escape }}"
+                 loading="lazy"
+                 width="400"
+                 height="400">
+          </div>
+
+          <div class="product-card__info">
+            <h3 class="product-card__title">{{ product.title }}</h3>
+            <div class="product-card__price">
+              {% if product.compare_at_price > product.price %}
+                <span class="product-card__price--sale">{{ product.price | money }}</span>
+                <span class="product-card__price--compare">{{ product.compare_at_price | money }}</span>
+              {% else %}
+                <span class="product-card__price--regular">{{ product.price | money }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </a>
+
+        {% form 'product', product %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" class="button button--primary"
+            {% unless product.available %}disabled{% endunless %}>
+            {% if product.available %}
+              Add to cart
+            {% else %}
+              Sold out
+            {% endif %}
+          </button>
+        {% endform %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Featured Collection"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 12,
+      "step": 2,
+      "default": 4,
+      "label": "Products to show"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}
