@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Preview</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="theme-preview-root"></div>
+    <script>
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'theme_update') {
+                const settings = event.data.settings;
+                // Apply theme settings to the preview
+                document.documentElement.style.setProperty('--primary-color', settings.colors.primary_color);
+                document.documentElement.style.setProperty('--secondary-color', settings.colors.secondary_color);
+                document.documentElement.style.setProperty('--background-color', settings.colors.background_color);
+                document.documentElement.style.setProperty('--text-color', settings.colors.text_color);
+                document.documentElement.style.setProperty('--accent-color', settings.colors.accent_color);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+{% assign main_menu = linklists[section.settings.menu] %}
+
+<header class="site-header">
+  <div class="page-width">
+    <div class="header-wrapper">
+      <!-- Logo -->
+      <div class="header-logo">
+        {% if section.settings.logo != blank %}
+          <a href="/" class="logo-image">
+            <img src="{{ section.settings.logo | img_url: 'master' }}"
+                 alt="{{ shop.name }}"
+                 loading="lazy"
+                 width="{{ section.settings.logo_width }}"
+                 height="{{ section.settings.logo_height }}">
+          </a>
+        {% else %}
+          <a href="/" class="shop-name">{{ shop.name }}</a>
+        {% endif %}
+      </div>
+
+      <!-- Navigation -->
+      <nav class="header-nav" role="navigation">
+        <ul class="site-nav">
+          {% for link in main_menu.links %}
+            <li class="site-nav__item{% if link.active %} site-nav__item--active{% endif %}">
+              <a href="{{ link.url }}" class="site-nav__link">
+                {{ link.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+
+      <!-- Cart and Search -->
+      <div class="header-actions">
+        <a href="/search" class="header-search">
+          {% render 'icon-search' %}
+        </a>
+        <a href="/cart" class="header-cart">
+          {% render 'icon-cart' %}
+          <span class="cart-count">{{ cart.item_count }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 100
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

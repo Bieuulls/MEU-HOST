@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="{{ shop.locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <title>{{ page_title | escape }}</title>
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  <!-- CSS -->
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  <!-- JS -->
+  {{ 'theme.js' | asset_url | script_tag }}
+
+  {{ content_for_header }}
+</head>
+
+<body class="template-{{ template | handle }}">
+  {% section 'header' %}
+
+  <main role="main" id="MainContent">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  {{ content_for_footer }}
+</body>
+</html>
