@@ -1,135 +1,93 @@
-import { createContext, useContext, useReducer, ReactNode } from 'react';
-import { Product, ProductVariant } from '../types/database';
+import React, { createContext, useContext, useState, useCallback } from 'react';
 
-interface CartItem {
-  product: Product;
-  variation?: ProductVariant;
+export interface CartItem {
+  id: string;
+  title: string;
+  price: number;
   quantity: number;
+  image: string;
+  variant?: Record<string, string>;
 }
 
-interface CartState {
+interface CartContextType {
   items: CartItem[];
-  total: number;
+  addItem: (item: Omit<CartItem, 'quantity'>) => void;
+  removeItem: (id: string) => void;
+  updateQuantity: (id: string, quantity: number) => void;
+  clearCart: () => void;
+  isCartOpen: boolean;
+  setIsCartOpen: (isOpen: boolean) => void;
+  itemCount: number;
+  subtotal: number;
 }
 
-type CartAction =
-  | { type: 'ADD_ITEM'; payload: CartItem }
-  | { type: 'REMOVE_ITEM'; payload: { productId: string; variationId?: string } }
-  | { type: 'UPDATE_QUANTITY'; payload: { productId: string; variationId?: string; quantity: number } }
-  | { type: 'CLEAR_CART' };
+const CartContext = createContext<CartContextType | undefined>(undefined);
 
-const CartContext = createContext<{
-  state: CartState;
-  addItem: (item: CartItem) => void;
-  removeItem: (productId: string, variationId?: string) => void;
-  updateQuantity: (productId: string, quantity: number, variationId?: string) => void;
-  clearCart: () => void;
-} | undefined>(undefined);
+export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [items, setItems] = useState<CartItem[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
-function cartReducer(state: CartState, action: CartAction): CartState {
-  switch (action.type) {
-    case 'ADD_ITEM': {
-      const existingItemIndex = state.items.findIndex(
-        item => 
-          item.product.id === action.payload.product.id && 
-          item.variation?.id === action.payload.variation?.id
-      );
+  const addItem = useCallback((newItem: Omit<CartItem, 'quantity'>) => {
+    setItems(currentItems => {
+      const existingItem = currentItems.find(item => item.id === newItem.id);
 
-      if (existingItemIndex > -1) {
-        const newItems = [...state.items];
-        newItems[existingItemIndex].quantity += action.payload.quantity;
-        return {
-          ...state,
-          items: newItems,
-          total: calculateTotal(newItems),
-        };
+      if (existingItem) {
+        return currentItems.map(item =>
+          item.id === newItem.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
       }
 
-      return {
-        ...state,
-        items: [...state.items, action.payload],
-        total: calculateTotal([...state.items, action.payload]),
-      };
-    }
+      return [...currentItems, { ...newItem, quantity: 1 }];
+    });
+    setIsCartOpen(true);
+  }, []);
 
-    case 'REMOVE_ITEM': {
-      const newItems = state.items.filter(
-        item => 
-          !(item.product.id === action.payload.productId && 
-            item.variation?.id === action.payload.variationId)
-      );
-      return {
-        ...state,
-        items: newItems,
-        total: calculateTotal(newItems),
-      };
-    }
+  const removeItem = useCallback((id: string) => {
+    setItems(currentItems => currentItems.filter(item => item.id !== id));
+  }, []);
 
-    case 'UPDATE_QUANTITY': {
-      const newItems = state.items.map(item => {
-        if (
-          item.product.id === action.payload.productId && 
-          item.variation?.id === action.payload.variationId
-        ) {
-          return { ...item, quantity: action.payload.quantity };
-        }
-        return item;
-      });
-      return {
-        ...state,
-        items: newItems,
-        total: calculateTotal(newItems),
-      };
-    }
+  const updateQuantity = useCallback((id: string, quantity: number) => {
+    if (quantity < 1) return;
 
-    case 'CLEAR_CART':
-      return {
-        items: [],
-        total: 0,
-      };
+    setItems(currentItems =>
+      currentItems.map(item =>
+        item.id === id ? { ...item, quantity } : item
+      )
+    );
+  }, []);
 
-    default:
-      return state;
-  }
-}
+  const clearCart = useCallback(() => {
+    setItems([]);
+  }, []);
 
-function calculateTotal(items: CartItem[]): number {
-  return items.reduce((total, item) => {
-    const price = item.variation?.price ?? item.product.price;
-    return total + (price * item.quantity);
-  }, 0);
-}
-
-export function CartProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(cartReducer, { items: [], total: 0 });
-
-  const addItem = (item: CartItem) => {
-    dispatch({ type: 'ADD_ITEM', payload: item });
-  };
-
-  const removeItem = (productId: string, variationId?: string) => {
-    dispatch({ type: 'REMOVE_ITEM', payload: { productId, variationId } });
-  };
-
-  const updateQuantity = (productId: string, quantity: number, variationId?: string) => {
-    dispatch({ type: 'UPDATE_QUANTITY', payload: { productId, quantity, variationId } });
-  };
-
-  const clearCart = () => {
-    dispatch({ type: 'CLEAR_CART' });
-  };
+  const itemCount = items.reduce((total, item) => total + item.quantity, 0);
+  const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
 
   return (
-    <CartContext.Provider value={{ state, addItem, removeItem, updateQuantity, clearCart }}>
+    <CartContext.Provider
+      value={{
+        items,
+        addItem,
+        removeItem,
+        updateQuantity,
+        clearCart,
+        isCartOpen,
+        setIsCartOpen,
+        itemCount,
+        subtotal
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
-}
+};
 
-export function useCart() {
+export const useCart = () => {
   const context = useContext(CartContext);
   if (context === undefined) {
     throw new Error('useCart must be used within a CartProvider');
   }
   return context;
-}
+};

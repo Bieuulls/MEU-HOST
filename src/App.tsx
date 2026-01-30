@@ -1,92 +1,65 @@
-import { BrowserRouter as Router, Routes, Route, Outlet, Link } from 'react-router-dom';
-import { Layout } from './components/Layout';
-import { Store } from './pages/store/Store';
-import { ThemeEditor } from './pages/theme-editor/ThemeEditor';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate
+} from 'react-router-dom';
+import { Login } from './pages/auth/Login';
+import { SignUp } from './pages/auth/SignUp';
+import { DashboardLayout } from './components/layout/DashboardLayout';
+import { Orders } from './pages/Orders';
+import { Products } from './pages/Products';
+import { AddProduct } from './pages/Products/AddProduct';
+import { Dashboard } from './pages/Dashboard';
 import { AuthProvider } from './contexts/AuthContext';
-import { ErrorBoundary } from './components/error/ErrorBoundary';
-import { ErrorProvider } from './contexts/error/ErrorContext';
-import { StorePreview } from './pages/store/preview/StorePreview';
-import { Products } from './pages/dashboard/Products';
-import { Orders } from './pages/dashboard/Orders';
-import { Customers } from './pages/dashboard/Customers';
-import { Dashboard } from './pages/dashboard/Dashboard';
+import { TenantProvider } from './contexts/TenantContext';
 import { ThemeProvider } from './contexts/ThemeContext';
-import { CartProvider } from './contexts/CartContext';
-import { Header } from './components/store/Header';
-import { Footer } from './components/store/Footer';
-import { Home } from './pages/store/Home';
-import { Categories } from './components/store/Categories';
-import { ProductDetail } from './pages/store/ProductDetail';
+import { PrivateRoute } from './components/PrivateRoute';
+import { Home } from './pages/Home';
+import { Customers } from './pages/Customers';
+import { Content } from './pages/Content';
+import { Analytics } from './pages/Analytics';
+import { Marketing } from './pages/Marketing';
+import { OnlineStore } from './pages/OnlineStore';
+import { ThemeEditor } from './pages/OnlineStore/components/EditorThemeSite/ThemeEditor';
+import { Settings } from './pages/Settings';
+import { Store } from './pages/Store';
 
-function LayoutWrapper() {
+function App() {
   return (
-    <Layout>
-      <Outlet />
-    </Layout>
-  );
-}
+    <Router>
+      <AuthProvider>
+        <TenantProvider>
+          <ThemeProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<SignUp />} />
+              <Route path="/store" element={<Store />} />
 
-export function App() {
-  return (
-    <ErrorBoundary>
-      <ErrorProvider>
-        <ThemeProvider>
-          <Router>
-            <AuthProvider>
-              <Routes>
-                {/* Rotas do dashboard */}
-                <Route path="/" element={<LayoutWrapper />}>
+              <Route path="/dashboard" element={<PrivateRoute />}>
+                <Route element={<DashboardLayout />}>
                   <Route index element={<Dashboard />} />
-                  <Route path="dashboard" element={<Dashboard />} />
-                  <Route path="products" element={<Products />} />
                   <Route path="orders" element={<Orders />} />
+                  <Route path="products" element={<Products />} />
+                  <Route path="products/add" element={<AddProduct />} />
                   <Route path="customers" element={<Customers />} />
-                  <Route path="store" element={<Store />} />
+                  <Route path="content" element={<Content />} />
+                  <Route path="analytics" element={<Analytics />} />
+                  <Route path="marketing" element={<Marketing />} />
+                  <Route path="online-store" element={<OnlineStore />} />
+                  <Route path="settings" element={<Settings />} />
                 </Route>
+                <Route path="theme-editor" element={<ThemeEditor />} />
+              </Route>
 
-                {/* Rotas separadas do editor de tema */}
-                <Route path="/theme-editor/:themeId" element={<ThemeEditor />} />
-                <Route path="/theme-preview/:themeId" element={<StorePreview />} />
-                <Route path="/store/preview/:themeId" element={<StorePreview />} />
-
-                {/* Rotas da loja */}
-                <Route path="/loja" element={
-                  <CartProvider>
-                    <div className="min-h-screen flex flex-col">
-                      <Header 
-                        cartCount={0}
-                        onSearch={(query) => console.log('Search:', query)}
-                      />
-                      <main className="flex-grow">
-                        <Routes>
-                          <Route path="/" element={<Home />} />
-                          <Route path="/categorias" element={<Categories />} />
-                          <Route path="/categoria/:categoryId" element={<Categories />} />
-                          <Route path="/produto/:productId" element={<ProductDetail />} />
-                        </Routes>
-                      </main>
-                      <Footer />
-                    </div>
-                  </CartProvider>
-                } />
-
-                {/* Rota de fallback para páginas não encontradas */}
-                <Route path="*" element={
-                  <div className="flex flex-col items-center justify-center min-h-screen">
-                    <h1 className="text-2xl font-bold mb-4">Página não encontrada</h1>
-                    <Link to="/" className="text-blue-500 hover:underline">
-                      Voltar para o Dashboard
-                    </Link>
-                  </div>
-                } />
-
-                {/* Rota para o editor de tema */}
-                <Route path="/admin/tema" element={<ThemeEditor />} />
-              </Routes>
-            </AuthProvider>
-          </Router>
-        </ThemeProvider>
-      </ErrorProvider>
-    </ErrorBoundary>
+              <Route path="*" element={<Navigate to="/login" replace />} />
+            </Routes>
+          </ThemeProvider>
+        </TenantProvider>
+      </AuthProvider>
+    </Router>
   );
 }
+
+export default App;
