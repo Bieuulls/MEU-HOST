@@ -1,83 +1,42 @@
-export interface ProductVariant {
-  id: string;
-  name: string;
-  price: number;
-  stock: number;
-  sku: string | null;
-  attributes: Record<string, string>;
-}
+// Mock types
 
 export interface Product {
-  id: string;
-  name: string;
-  description: string | null;
-  price: number;
-  stock: number;
-  sku: string | null;
-  active: boolean;
-  images: string[];
-  category: string | null;
-  created_at: string;
-  updated_at: string;
-  user_id: string;
-  featured: boolean;
-  discount: number;
-  rating: number;
-  reviews_count: number;
-  specifications: Record<string, string>;
-  variants: ProductVariant[];
-  tags: string[];
-  brand: string | null;
-  weight: number | null;
-  dimensions: {
-    length: number;
-    width: number;
-    height: number;
-  } | null;
-  seo: {
-    title: string;
+    id: string;
+    name: string;
     description: string;
-    keywords: string[];
-  } | null;
-  metadata: Record<string, any>;
+    price: number;
+    stock: number;
+    sku?: string;
+    barcode?: string;
+    weight?: number;
+    status: 'active' | 'draft' | 'archived';
+    tenant_id: string;
+    is_featured: boolean;
+    image_url?: string;
+    images?: string[];
+    created_at?: string;
+    updated_at?: string;
+    category?: string;
+    active?: boolean;
+    user_id?: string;
+    featured?: boolean;
+    seo?: any;
+    metadata?: any;
+    dimensions?: any;
 }
 
 export interface Address {
-  street: string;
-  number: string;
-  complement?: string;
-  neighborhood: string;
-  city: string;
-  state: string;
-  zipcode: string;
-  country: string;
+    // Define address properties
+    street: string;
+    city: string;
+    state: string;
+    zip: string;
+    country: string;
 }
 
-export interface ProductFormData {
-  name: string;
-  description: string;
-  price: number;
-  stock: number;
-  sku: string;
-  active: boolean;
-  images: string[];
-  category: string;
-  featured: boolean;
-  discount: number;
-  specifications: Record<string, string>;
-  variants: ProductVariant[];
-  tags: string[];
-  brand: string;
-  weight: number;
-  dimensions: {
-    length: number;
-    width: number;
-    height: number;
-  };
-  seo: {
-    title: string;
-    description: string;
-    keywords: string[];
-  };
-  metadata: Record<string, any>;
+export interface ProductVariant {
+    // Define variant properties
+    id: string;
+    name: string;
+    price: number;
 }

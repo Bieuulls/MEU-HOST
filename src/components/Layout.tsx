@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
-import { TopBar } from './TopBar';
 import { Sidebar } from './Sidebar';
-import { Breadcrumb } from './Breadcrumb';
+import { TopBar } from './TopBar';
 
 interface LayoutProps {
   children: ReactNode;
@@ -13,11 +12,8 @@ export function Layout({ children }: LayoutProps) {
       <TopBar />
       <div className="flex">
         <Sidebar />
-        <main className="flex-1 p-6 overflow-auto">
-          <div className="container mx-auto">
-            <Breadcrumb />
-            {children}
-          </div>
+        <main className="flex-1 p-6">
+          {children}
         </main>
       </div>
     </div>

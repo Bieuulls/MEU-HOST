@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
-import { Store } from '../pages/store/Store';
-import { ProductList } from '../pages/store/ProductList';
-import { ProductDetails } from '../pages/store/ProductDetails';
-import { Cart } from '../pages/store/Cart';
-import { Checkout } from '../pages/store/Checkout';
-import { OrderConfirmation } from '../pages/store/OrderConfirmation';
+import { Store } from '../pages/Store/Store';
+import { ProductList } from '../pages/Store/ProductList';
+import { ProductDetails } from '../pages/Store/ProductDetails';
+import { Cart } from '../pages/Store/Cart';
+import { Checkout } from '../pages/Store/Checkout';
+import { OrderConfirmation } from '../pages/Store/OrderConfirmation';
 
 export function StoreRoutes() {
   return (
