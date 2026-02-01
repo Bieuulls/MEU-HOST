@@ -1,219 +1,222 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { 
-  Home, 
-  Package, 
-  Users, 
-  FileText, 
-  BarChart2, 
-  Mail, 
-  ShoppingBag, 
-  Tag, 
+import {
+  Home,
+  FileText,
   ShoppingCart,
-  ChevronDown,
-  Settings,
+  Package,
+  Users,
+  FileImage,
+  BarChart2,
+  Megaphone,
+  Tag,
   Store,
-  Menu,
-  ChevronLeft
+  Folder,
+  FileBox,
+  Menu as MenuIcon,
+  BookOpen,
+  Box,
+  ArrowLeftRight,
+  Gift,
+  Layers,
+  Files,
+  BarChart,
+  Eye,
+  Mail,
+  Zap,
+  Layout,
+  Globe,
+  Settings,
+  ChevronRight,
+  ChevronDown,
+  PanelLeftClose,
+  PanelLeftOpen,
 } from 'lucide-react';
 
-interface MenuItem {
-  label: string;
-  path: string;
-  icon: React.ElementType;
-  children?: MenuItem[];
-}
-
-const menuItems: MenuItem[] = [
+const navigation = [
+  { name: 'Início', to: '/dashboard/inicio', icon: Home },
+  { name: 'Rascunhos', to: '/dashboard/rascunhos', icon: FileText },
+  { name: 'Checkouts Abandonados', to: '/dashboard/checkouts', icon: ShoppingCart },
   {
-    label: 'Dashboard',
-    path: '/',
-    icon: Home
-  },
-  {
-    label: 'Produtos',
-    path: '/products',
+    name: 'Pedidos',
+    to: '/dashboard/pedidos',
     icon: Package,
     children: [
-      {
-        label: 'Lista de Produtos',
-        path: '/products',
-        icon: Package
-      },
-      {
-        label: 'Segmentos',
-        path: '/products/segments',
-        icon: Tag
-      }
-    ]
+      { name: 'Coleções', to: '/dashboard/pedidos/colecoes', icon: Folder },
+      { name: 'Estoque', to: '/dashboard/pedidos/estoque', icon: Box },
+      { name: 'Pedidos de Compra', to: '/dashboard/pedidos/pedidos-de-compra', icon: FileBox },
+      { name: 'Transferências', to: '/dashboard/pedidos/transferencias', icon: ArrowLeftRight },
+      { name: 'Cartões-Presente', to: '/dashboard/pedidos/cartoes-presente', icon: Gift },
+    ],
   },
   {
-    label: 'Pedidos',
-    path: '/orders',
-    icon: ShoppingCart
-  },
-  {
-    label: 'Clientes',
-    path: '/customers',
-    icon: Users
-  },
-  {
-    label: 'Marketing',
-    path: '/marketing',
-    icon: Mail,
+    name: 'Produtos',
+    to: '/dashboard/produtos',
+    icon: Package,
     children: [
-      {
-        label: 'Campanhas',
-        path: '/marketing/campaigns',
-        icon: Mail
-      },
-      {
-        label: 'Automações',
-        path: '/marketing/automations',
-        icon: Settings
-      }
-    ]
+      { name: 'Segmentos', to: '/dashboard/produtos/segmentos', icon: Layers },
+    ],
   },
   {
-    label: 'Analytics',
-    path: '/analytics',
-    icon: BarChart2
-  },
-  {
-    label: 'Conteúdo',
-    path: '/content',
-    icon: FileText
-  },
-  {
-    label: 'Canais de Venda',
-    path: '/sales-channels',
-    icon: ShoppingBag,
+    name: 'Clientes',
+    to: '/dashboard/clientes',
+    icon: Users,
     children: [
-      {
-        label: 'Loja Online',
-        path: '/store',
-        icon: Store
-      },
-      {
-        label: 'Marketplaces',
-        path: '/sales-channels/marketplaces',
-        icon: ShoppingBag
-      }
-    ]
-  }
+      { name: 'Arquivos', to: '/dashboard/clientes/arquivos', icon: Files },
+      { name: 'Menus', to: '/dashboard/clientes/menus', icon: MenuIcon },
+      { name: 'Posts do Blog', to: '/dashboard/clientes/blog', icon: BookOpen },
+    ],
+  },
+  {
+    name: 'Conteúdo',
+    to: '/dashboard/conteudo',
+    icon: FileImage,
+    children: [
+      { name: 'Metaobjetos', to: '/dashboard/conteudo/metaobjetos', icon: Box },
+      { name: 'Arquivos', to: '/dashboard/conteudo/arquivos', icon: Files },
+      { name: 'Menus', to: '/dashboard/conteudo/menus', icon: MenuIcon },
+      { name: 'Posts do Blog', to: '/dashboard/conteudo/blog', icon: BookOpen },
+    ],
+  },
+  {
+    name: 'Análises',
+    to: '/dashboard/analises',
+    icon: BarChart2,
+    children: [
+      { name: 'Relatórios', to: '/dashboard/analises/relatorios', icon: BarChart },
+      { name: 'Live View', to: '/dashboard/analises/live-view', icon: Eye },
+    ],
+  },
+  {
+    name: 'Marketing',
+    to: '/dashboard/marketing',
+    icon: Megaphone,
+    children: [
+      { name: 'Campanhas', to: '/dashboard/marketing/campanhas', icon: Mail },
+      { name: 'Automações', to: '/dashboard/marketing/automacoes', icon: Zap },
+    ],
+  },
+  { name: 'Descontos', to: '/dashboard/descontos', icon: Tag },
+  {
+    name: 'Canais de Vendas',
+    to: '/dashboard/canais-vendas',
+    icon: Store,
+    children: [
+      { name: 'Temas', to: '/dashboard/canais-vendas/temas', icon: Layout },
+      { name: 'Posts do Blog', to: '/dashboard/canais-vendas/blog', icon: BookOpen },
+      { name: 'Páginas', to: '/dashboard/canais-vendas/paginas', icon: FileText },
+      { name: 'Navegação', to: '/dashboard/canais-vendas/navegacao', icon: Globe },
+      { name: 'Preferências', to: '/dashboard/canais-vendas/preferencias', icon: Settings },
+    ],
+  },
 ];
 
 export function Sidebar() {
-  const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [openMenus, setOpenMenus] = useState<string[]>([]);
 
-  const toggleItem = (label: string) => {
-    setExpandedItems(prev =>
-      prev.includes(label)
-        ? prev.filter(item => item !== label)
-        : [...prev, label]
+  const toggleSubmenu = (menuName: string) => {
+    setOpenMenus((prev) =>
+      prev.includes(menuName)
+        ? prev.filter((name) => name !== menuName)
+        : [...prev, menuName]
     );
   };
 
   const toggleSidebar = () => {
-    setIsCollapsed(prev => !prev);
-    // Quando colapsar, fechar todos os menus expandidos
+    setIsCollapsed(!isCollapsed);
+    // Fecha todos os submenus quando o menu é recolhido
     if (!isCollapsed) {
-      setExpandedItems([]);
+      setOpenMenus([]);
     }
   };
 
-  const renderMenuItem = (item: MenuItem) => {
-    const isExpanded = expandedItems.includes(item.label);
-    const hasChildren = item.children && item.children.length > 0;
-    const Icon = item.icon;
-
-    return (
-      <div key={item.path} className="w-full">
-        {hasChildren ? (
-          <div>
-            <button
-              onClick={() => toggleItem(item.label)}
-              className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
-            >
-              <Icon className="w-5 h-5 mr-3 text-gray-400" />
-              {!isCollapsed && (
-                <>
-                  <span className="flex-1 text-left">{item.label}</span>
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform ${
-                      isExpanded ? 'transform rotate-180' : ''
-                    }`}
-                  />
-                </>
-              )}
-            </button>
-            {isExpanded && !isCollapsed && item.children && (
-              <div className="ml-4 mt-1 space-y-1">
-                {item.children.map((child) => (
-                  <NavLink
-                    key={child.path}
-                    to={child.path}
-                    className={({ isActive }) =>
-                      `flex items-center px-4 py-2 text-sm ${
-                        isActive
-                          ? 'text-blue-600 bg-blue-50'
-                          : 'text-gray-600 hover:bg-gray-100'
-                      } rounded-md transition-colors`
-                    }
-                  >
-                    {child.icon && <child.icon className="w-4 h-4 mr-3" />}
-                    {child.label}
-                  </NavLink>
-                ))}
-              </div>
-            )}
-          </div>
-        ) : (
-          <NavLink
-            to={item.path}
-            className={({ isActive }) =>
-              `flex items-center px-4 py-2 ${
-                isActive
-                  ? 'text-blue-600 bg-blue-50'
-                  : 'text-gray-600 hover:bg-gray-100'
-              } rounded-md transition-colors group`
-            }
-            title={isCollapsed ? item.label : ''}
-          >
-            <Icon className={`w-5 h-5 ${isCollapsed ? '' : 'mr-3'} text-gray-400 group-hover:text-gray-600`} />
-            {!isCollapsed && item.label}
-          </NavLink>
-        )}
-      </div>
-    );
-  };
-
   return (
-    <aside 
-      className={`${
+    <nav
+      className={`bg-white border-r border-gray-200 min-h-[calc(100vh-4rem)] transition-all duration-300 ${
         isCollapsed ? 'w-16' : 'w-64'
-      } bg-white border-r border-gray-200 min-h-screen transition-all duration-300 ease-in-out relative`}
+      }`}
     >
-      <div className="p-4">
-        <div className="mb-8 flex items-center justify-between">
-          {!isCollapsed && <h1 className="text-xl font-bold text-gray-800">Admin</h1>}
-          <button
-            onClick={toggleSidebar}
-            className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
-            title={isCollapsed ? 'Expandir menu' : 'Recolher menu'}
-          >
-            {isCollapsed ? (
-              <Menu className="w-5 h-5 text-gray-600" />
-            ) : (
-              <ChevronLeft className="w-5 h-5 text-gray-600" />
-            )}
-          </button>
-        </div>
-        <nav className="space-y-1">
-          {menuItems.map(renderMenuItem)}
-        </nav>
+      <div className="sticky top-0 bg-white z-10 p-2 border-b border-gray-200">
+        <button
+          onClick={toggleSidebar}
+          className="w-full flex items-center justify-center p-2 hover:bg-gray-100 rounded-md"
+          title={isCollapsed ? "Expandir menu" : "Recolher menu"}
+        >
+          {isCollapsed ? (
+            <PanelLeftOpen className="h-5 w-5 text-gray-500" />
+          ) : (
+            <PanelLeftClose className="h-5 w-5 text-gray-500" />
+          )}
+        </button>
       </div>
-    </aside>
+      <div className="p-2">
+        <ul className="space-y-1">
+          {navigation.map((item) => (
+            <li key={item.name}>
+              {item.children ? (
+                <div>
+                  <button
+                    onClick={() => toggleSubmenu(item.name)}
+                    className={`w-full flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900 ${
+                      openMenus.includes(item.name) ? 'bg-gray-50' : ''
+                    }`}
+                    title={isCollapsed ? item.name : undefined}
+                  >
+                    <div className={`flex items-center ${isCollapsed ? 'justify-center w-full' : 'gap-2'}`}>
+                      {item.icon && <item.icon className="h-5 w-5 flex-shrink-0" />}
+                      {!isCollapsed && <span>{item.name}</span>}
+                    </div>
+                    {!isCollapsed && (
+                      openMenus.includes(item.name) ? (
+                        <ChevronDown className="h-4 w-4 flex-shrink-0" />
+                      ) : (
+                        <ChevronRight className="h-4 w-4 flex-shrink-0" />
+                      )
+                    )}
+                  </button>
+                  {openMenus.includes(item.name) && !isCollapsed && (
+                    <ul className="ml-6 mt-1 space-y-1">
+                      {item.children.map((child) => (
+                        <li key={child.name}>
+                          <NavLink
+                            to={child.to}
+                            className={({ isActive }) =>
+                              `flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-md ${
+                                isActive
+                                  ? 'bg-gray-100 text-gray-900'
+                                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                              }`
+                            }
+                          >
+                            {child.icon && <child.icon className="h-4 w-4 flex-shrink-0" />}
+                            <span>{child.name}</span>
+                          </NavLink>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ) : (
+                <NavLink
+                  to={item.to}
+                  className={({ isActive }) =>
+                    `flex items-center ${isCollapsed ? 'justify-center' : 'gap-2'} px-3 py-2 text-sm font-medium rounded-md ${
+                      isActive
+                        ? 'bg-gray-100 text-gray-900'
+                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                    }`
+                  }
+                  title={isCollapsed ? item.name : undefined}
+                >
+                  {item.icon && <item.icon className="h-5 w-5 flex-shrink-0" />}
+                  {!isCollapsed && <span>{item.name}</span>}
+                </NavLink>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
   );
 }
