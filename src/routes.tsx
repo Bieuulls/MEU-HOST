@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
@@ -11,6 +11,32 @@ import { Segments } from './pages/dashboard/products/Segments';
 import { PrivateRoute } from './components/PrivateRoute';
 import { Layout } from './components/Layout';
 import { AuthProvider } from './contexts/AuthContext';
+import { CartProvider } from './contexts/CartContext';
+import { Header } from './components/store/Header';
+import { Footer } from './components/store/Footer';
+import { Home as StoreHome } from './pages/store/Home';
+import { Categories } from './components/store/Categories';
+import { ProductDetail } from './pages/store/ProductDetail';
+import { ErrorBoundary } from './components/error/ErrorBoundary';
+import { ErrorProvider } from './contexts/error/ErrorContext';
+import { ThemeProvider } from './contexts/ThemeContext';
+
+function StoreLayout() {
+  return (
+    <CartProvider>
+      <div className="min-h-screen flex flex-col">
+        <Header
+          cartCount={0}
+          onSearch={(query) => console.log('Search:', query)}
+        />
+        <main className="flex-grow">
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
+    </CartProvider>
+  );
+}
 
 const router = createBrowserRouter([
   {
@@ -50,8 +76,30 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/loja/*',
+    path: '/store',
     element: <Store />,
+  },
+  {
+    path: '/loja',
+    element: <StoreLayout />,
+    children: [
+      {
+        index: true,
+        element: <StoreHome />,
+      },
+      {
+        path: 'categorias',
+        element: <Categories />,
+      },
+      {
+        path: 'categoria/:categoryId',
+        element: <Categories />,
+      },
+      {
+        path: 'produto/:productId',
+        element: <ProductDetail />,
+      },
+    ],
   },
   {
     path: '*',
@@ -61,8 +109,14 @@ const router = createBrowserRouter([
 
 export function Routes() {
   return (
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <ErrorBoundary>
+      <ErrorProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            <RouterProvider router={router} />
+          </AuthProvider>
+        </ThemeProvider>
+      </ErrorProvider>
+    </ErrorBoundary>
   );
 }
